@@ -1,5 +1,38 @@
 .content {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  flex-direction: column;
+
+  &ChoseBar {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+  }
+
+  &Link {
+    background-color: #dddddd;
+    display: block;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    width: 20%;
+    height: 20%;
+    border: 1px solid #bbbbbb;
+    border-radius: 8px;
+    letter-spacing: 1px;
+    font-family: -webkit-pictograph, serif;
+    font-size: larger;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease-in-out;
+    &:hover {
+      -webkit-box-shadow: 6px 3px 20px -2px rgba(0,0,0,0.75);
+      -moz-box-shadow: 6px 3px 20px -2px rgba(0,0,0,0.75);
+      box-shadow: 6px 3px 20px -2px rgba(0,0,0,0.75);
+    }
+  }
+  &List {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 }

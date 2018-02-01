@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 
 // Instruments
 import Styles from './styles.scss';
-import hab from '../../assets/blueHabibi.jpg';
-import amy from '../../assets/amy.jpg';
+import hab from '../../theme/assets/blueHabibi.jpg';
+import amy from '../../theme/assets/amy.jpg';
 
 // Components
 import Shisha from '../Shisha';
@@ -14,51 +14,54 @@ const nouns = ["ninja", "chair", "pancake", "statue", "unicorn", "rainbows", "la
 const shishasImg = [hab, amy];
 
 export default class Barchik extends Component {
-    constructor() {
+    constructor () {
         super();
 
         this.state = {
             listOfShishas: []
-        }
+        };
     }
 
     idGenerattor = () => Math.random().toString(32).slice(2);
 
     getRandomEl = (array) => {
         const index = Math.floor(Math.random() * array.length);
+
         return array[index];
     };
 
     shishaGenerator = () => {
         const result = [];
+
         for (let i = 0; i < 30; i++) {
             const key = this.idGenerattor();
             const getAdj = this.getRandomEl(adjectives);
             const getNoun = this.getRandomEl(nouns);
             const getImg = this.getRandomEl(shishasImg);
 
-            const shishka = <Shisha key = {key} name ={`${getAdj} ${getNoun}`} img = {getImg} />;
+            const shishka = <Shisha img = { getImg } key = { key } name = { `${getAdj} ${getNoun}` } />;
+
             result.push(shishka);
         }
-        this.setState((prevState) => ({ listOfShishas: [...result, ...prevState.listOfShishas]}))
+        this.setState((prevState) => ({ listOfShishas: [...result, ...prevState.listOfShishas]}));
     };
 
     generateShisha = () => {
         this.shishaGenerator();
     };
 
-    render() {
+    render () {
         const { listOfShishas } = this.state;
+
         return (
-            <div className={Styles.content}>
-                <div className={Styles.contentChoseBar}>
-                    Wanna smthing to buy?
-                    <a className={Styles.contentLink} onClick={this.generateShisha}>To show the shit</a>
+            <div className = { Styles.content }>
+                <div className = { Styles.contentChoseBar }>
+                    <a className = { Styles.contentLink } onClick = { this.generateShisha }>To show the shit</a>
                 </div>
-                <div className={Styles.constentList}>
+                <div className = { Styles.contentList }>
                     {listOfShishas}
                 </div>
             </div>
-        )
+        );
     }
 }

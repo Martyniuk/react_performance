@@ -1,11 +1,15 @@
+// Core
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './containers/App/App';
+
+// Instruments
 import registerServiceWorker from './registerServiceWorker';
 import registerObserver from 'react-perf-devtool';
+import './theme/reset.css';
+import './index.css';
 
-// let registerObserver = require('react-perf-devtool');
+// Components
+import App from './containers/App/App';
 
 registerObserver();
 
