@@ -63,7 +63,7 @@ export default class Barchik extends Component {
         return (
             <div className = { Styles.content }>
                 <div className = { Styles.contentChoseBar }>
-                    <a className = { Styles.contentLink } onClick = { this.generateShisha }>To show the shit</a>
+                    <a className = { Styles.contentLink } onClick = { this.generateShisha }>To show the Goods</a>
                 </div>
                 <div className = { Styles.contentList }>
                     {listOfShishas}
