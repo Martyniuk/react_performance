@@ -50,7 +50,7 @@ export default class Barchik extends Component {
     render() {
         const { listOfShishas } = this.state;
         return (
-            <div className="content">
+            <div className={Styles.content}>
                 <div className={Styles.contentChoseBar}>
                     Wanna smthing to buy?
                     <a className={Styles.contentLink} onClick={this.generateShisha}>To show the shit</a>
