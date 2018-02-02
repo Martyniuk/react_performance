@@ -1,0 +1,15 @@
+.numbers {
+  display: flex;
+  justify-content: space-around;
+  width: 30%;
+  .number {
+    color: black;
+    letter-spacing: 1px;
+    span {
+      color: red;
+      font-family: cursive;
+      font-size: larger;
+      display: block;
+    }
+  }
+}

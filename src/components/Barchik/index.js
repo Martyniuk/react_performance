@@ -15,21 +15,25 @@ import lol from '../../theme/assets/lol.jpeg';
 
 // Components
 import Shisha from '../Shisha';
+import Numbers from '../Numbers';
 
 const adjectives = ["adamant", "adroit", "amatory", "animistic", "antic", "arcadian", "baleful", "bellicose", "bilious", "boorish", "calamitous", "caustic", "cerulean", "comely", "concomitant", "contumacious", "corpulent", "crapulous", "defamatory", "didactic", "dilatory", "dowdy", "efficacious", "effulgent", "egregious", "endemic", "equanimous", "execrable", "fastidious", "feckless", "fecund", "friable", "fulsome", "garrulous", "guileless", "gustatory", "heuristic", "histrionic", "hubristic", "incendiary", "insidious", "insolent", "intransigent", "inveterate", "invidious", "irksome", "jejune", "jocular", "judicious", "lachrymose", "limpid", "loquacious", "luminous", "mannered", "mendacious", "meretricious", "minatory", "mordant", "munificent", "nefarious", "noxious", "obtuse", "parsimonious", "pendulous", "pernicious", "pervasive", "petulant", "platitudinous", "precipitate", "propitious", "puckish", "querulous", "quiescent", "rebarbative", "recalcitant", "redolent", "rhadamanthine", "risible", "ruminative", "sagacious", "salubrious", "sartorial", "sclerotic", "serpentine", "spasmodic", "strident", "taciturn", "tenacious", "tremulous", "trenchant", "turbulent", "turgid", "ubiquitous", "uxorious", "verdant", "voluble", "voracious", "wheedling", "withering", "zealous"];
 const nouns = ["ninja", "chair", "pancake", "statue", "unicorn", "rainbows", "laser", "senor", "bunny", "captain", "nibblets", "cupcake", "carrot", "gnomes", "glitter", "potato", "salad", "toejam", "curtains", "beets", "toilet", "exorcism", "stick figures", "mermaid eggs", "sea barnacles", "dragons", "jellybeans", "snakes", "dolls", "bushes", "cookies", "apples", "ice cream", "ukulele", "kazoo", "banjo", "opera singer", "circus", "trampoline", "carousel", "carnival", "locomotive", "hot air balloon", "praying mantis", "animator", "artisan", "artist", "colorist", "inker", "coppersmith", "director", "designer", "flatter", "stylist", "leadman", "limner", "make-up artist", "model", "musician", "penciller", "producer", "scenographer", "set decorator", "silversmith", "teacher", "auto mechanic", "beader", "bobbin boy", "clerk of the chapel", "filling station attendant", "foreman", "maintenance engineering", "mechanic", "miller", "moldmaker", "panel beater", "patternmaker", "plant operator", "plumber", "sawfiler", "shop foreman", "soaper", "stationary engineer", "wheelwright", "woodworkers"];
 const shishasImg = [hab, amy, eg1, kherson, km, amy2, syr, lol, egypt];
+const numbers = [1,2,3];
 
 export default class Barchik extends Component {
     constructor () {
         super();
 
         this.state = {
-            listOfShishas: []
+            listOfShishas: [],
+            number: 7,
+            prevNumber: 7
         };
     }
 
-    idGenerattor = () => Math.random().toString(32).slice(2);
+    idGenerator = () => Math.random().toString(32).slice(2);
 
     getRandomEl = (array) => {
         const index = Math.floor(Math.random() * array.length);
@@ -38,10 +42,12 @@ export default class Barchik extends Component {
     };
 
     shishaGenerator = () => {
+        this.getPrevStateNumber(this.state.number);
         const result = [];
+        const generatedNumber = this.getRandomEl(numbers);
 
         for (let i = 0; i < 30; i++) {
-            const key = this.idGenerattor();
+            const key = this.idGenerator();
             const getAdj = this.getRandomEl(adjectives);
             const getNoun = this.getRandomEl(nouns);
             const getImg = this.getRandomEl(shishasImg);
@@ -50,20 +56,33 @@ export default class Barchik extends Component {
 
             result.push(shishka);
         }
-        this.setState((prevState) => ({ listOfShishas: [...result, ...prevState.listOfShishas]}));
+        this.setState((prevState) => ({
+            listOfShishas: [...result, ...prevState.listOfShishas],
+            number:        generatedNumber
+        }));
     };
 
     generateShisha = () => {
         this.shishaGenerator();
     };
 
+    getPrevStateNumber (number) {
+        this.setState({ prevNumber: number });
+    }
+
+    shouldComponentUpdate (_, nextState) {
+        console.log(`this.state.number --> ${this.state.number} ====> nextState.number${nextState.number}`);
+        return this.state.number !== nextState.number;
+    }
+
     render () {
-        const { listOfShishas } = this.state;
+        const { listOfShishas, number, prevNumber } = this.state;
 
         return (
             <div className = { Styles.content }>
                 <div className = { Styles.contentChoseBar }>
                     <a className = { Styles.contentLink } onClick = { this.generateShisha }>To show the Goods</a>
+                    <Numbers number={number} prevNumber={prevNumber}/>
                 </div>
                 <div className = { Styles.contentList }>
                     {listOfShishas}
